@@ -183,7 +183,7 @@ function addLogEntry(status) {
             : '<span class="badge badge-lg badge-dot"><i class="bg-danger"></i>Lost</span>'
         }</td>
         <td>${hintUsed ? "Yes" : "No"}</td>
-        <td>${hintUsed ? hintMessage : ""}</td>
+        <td>${hintUsed ? hintMessage : "N/A"}</td>
     `;
 
     elements.log.querySelector("tbody").appendChild(row);
@@ -365,7 +365,7 @@ function handleHint() {
     coins -= 10;
     hintUsed = true;
     elements.hintButton.disabled = true;
-    const hintMessage = generateHint();
+    hintMessage = generateHint();
     displayMessage(`Hint: ${hintMessage}`, "blue");
     updateDashboard();
 }
@@ -389,6 +389,5 @@ function generateHint() {
 
     return hints[Math.floor(Math.random() * hints.length)]();
 }
-
 
 updateDashboard();
