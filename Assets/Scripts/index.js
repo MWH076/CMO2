@@ -174,12 +174,17 @@ function formatDate(date) {
 }
 
 function addLogEntry(status) {
+    const usedMoves = guessedNumbers.length;
+    const remainingMoves = attempts;
+    const totalMoves = customAttempts || 4 + level - 1;
+    const movesInfo = `${usedMoves}U ${totalMoves - usedMoves}L`;
+
     const row = document.createElement("tr");
 
     row.innerHTML = `
         <td>${level}</td>
         <td>1 to ${maxNumber}</td>
-        <td>${guessedNumbers.length}</td>
+        <td>${movesInfo}</td>
         <td>${guessedNumbers.join(", ") || "None"}</td>
         <td>${randomNumber}</td>
         <td>${elapsedTime} s</td>
@@ -210,14 +215,16 @@ function stopTimer() {
 function startNewLevel() {
     level++;
     resetGame(10 * level, 4 + level - 1);
+    startTimer();
 }
 
 function restartLevel() {
     resetGame(maxNumber, 4 + level - 1);
 }
 
-function resetGame(newMaxNumber) {
+function resetGame(newMaxNumber, newAttempts) {
     maxNumber = newMaxNumber;
+    attempts = newAttempts;
     randomNumber = generateRandomNumber(maxNumber);
     totalAttempts = 0;
     guessedNumbers = [];
