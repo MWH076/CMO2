@@ -63,16 +63,6 @@ const achievements = [
         unlockedAt: null
     },
     {
-        id: 'soCloseYetSoFar',
-        name: 'So Close, Yet So Far',
-        description: 'Make a guess that is off by only one number.',
-        icon: '<i class="ph ph-smiley-x-eyes"></i>',
-        condition: function () {
-            return Math.abs(guessedNumbers.slice(-1)[0] - randomNumber) === 1;
-        },
-        unlockedAt: null
-    },
-    {
         id: 'afkModeActivated',
         name: 'AFK Mode Activated',
         description: 'Complete a level in more than 2 minutes.',
