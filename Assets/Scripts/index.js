@@ -8,7 +8,8 @@ let level = 1,
     coins = 0,
     hintUsed = false,
     hintMessage = "",
-    elapsedTime = 0;
+    elapsedTime = 0,
+    isGameOver = false;
 
 
 const achievements = [
@@ -234,6 +235,8 @@ elements.pausePlayButton.addEventListener("click", togglePlayPause);
 elements.submitButton.addEventListener("click", handleGuess);
 elements.hintButton.addEventListener("click", handleHint);
 document.addEventListener("keydown", (e) => {
+    if (isGameOver) return;
+
     if (e.key === "Enter" && !elements.submitButton.disabled) {
         handleGuess();
     } else if (e.key === "Escape") {
@@ -243,6 +246,8 @@ document.addEventListener("keydown", (e) => {
 });
 
 function togglePlayPause() {
+    if (isGameOver) return;
+
     const isPlaying = elements.pausePlayButton.textContent === "Play";
     elements.pausePlayButton.textContent = isPlaying ? "Pause" : "Play";
     elements.submitButton.disabled = !isPlaying;
@@ -362,6 +367,7 @@ function gameOver() {
     elements.submitButton.disabled = true;
     elements.hintButton.disabled = true;
     elements.guessInput.disabled = true;
+    isGameOver = true;
 }
 
 function handleHint() {
