@@ -166,8 +166,7 @@ function formatDate(date) {
 function addLogEntry(status) {
     const usedMoves = guessedNumbers.length;
     const remainingMoves = attempts;
-    const totalMoves = customAttempts || 4 + level - 1;
-    const movesInfo = `${usedMoves}U ${totalMoves - usedMoves}L`;
+    const movesInfo = `${usedMoves}U ${remainingMoves}L`;
 
     const row = document.createElement("tr");
 
@@ -203,18 +202,23 @@ function stopTimer() {
 }
 
 function startNewLevel() {
+    if (attempts <= 0) {
+        gameOver();
+        return;
+    }
+
     level++;
-    resetGame(10 * level, 4 + level - 1);
+    resetGame(10 * level);
     startTimer();
 }
+
 
 function restartLevel() {
     resetGame(maxNumber, 4 + level - 1);
 }
 
-function resetGame(newMaxNumber, newAttempts) {
+function resetGame(newMaxNumber) {
     maxNumber = newMaxNumber;
-    attempts = newAttempts;
     randomNumber = generateRandomNumber(maxNumber);
     totalAttempts = 0;
     guessedNumbers = [];
