@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Count Me Out Too" property="og:title" />
+    <meta content="A guess the number game. Now with customization features! (Beta)" property="og:description" />
+    <meta content="https://MWH076.github.io/CMO/" property="og:url" />
+    <meta content="https://github.com/MWH076/CMO/blob/main/Assets/Images/logo.png?raw=true" property="og:image" />
+    <meta content="#FF90AA" data-react-helmet="true" name="theme-color" />
+
+    <!-- Tab -->
+    <link rel="icon" type="image/x-icon" href="Assets/Images/logo.png">
+    <title>Count Me Out Too</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@webpixels/css@1.2.6/dist/index.css">
+    <link rel="stylesheet" href="Assets/Styles/index.css">
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="Assets/Scripts/index.js" defer></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm dashboard-card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Count Me Out</h3>
+                        <div class="row row-cols-2 g-5 mb-3">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body pb-5">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-1">
+                                                <span class="d-block font-semibold text-sm text-heading"><span
+                                                        id="currentLevel">1</span></span>
+                                                <div class="text-xs text-muted"><span id="currentLevel">Level</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body pb-5">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-1">
+                                                <span class="d-block font-semibold text-sm text-heading"><span
+                                                        id="currentAttempts">4</span></span>
+                                                <div class="text-xs text-muted">Moves Left</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body pb-5">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-1">
+                                                <span class="d-block font-semibold text-sm text-heading">1 to <span
+                                                        id="maxNumber">10</span></span>
+                                                <div class="text-xs text-muted">Guess Range</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body pb-5">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-1">
+                                                <span class="d-block font-semibold text-sm text-heading"><span
+                                                        id="timeElapsed">0</span>s</span>
+                                                <div class="text-xs text-muted">Time Taken</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <div class="input-group input-group-sm input-group-inline">
+                                <span class="input-group-text pe-2"><i class="bi bi-123"></i></span>
+                                <input type="number" class="form-control" placeholder="Enter your guess" min="1"
+                                    id="guessInput" disabled>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-sm px-3 btn-neutral d-flex align-items-center"
+                                    id="submitGuess" disabled>
+                                    <span>Check</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="btn-group my-3 w-full">
+                            <button class="btn btn-sm btn-neutral text-primary" aria-current="page"
+                                id="pausePlayButton">Play</button>
+                            <button class="btn btn-sm btn-neutral" id="hintButton" disabled>Hint</button>
+                            <button class="btn btn-sm btn-neutral" data-bs-toggle="offcanvas"
+                                data-bs-target="#logs">Logs</button>
+                            <button class="btn btn-sm btn-neutral" data-bs-toggle="offcanvas"
+                                data-bs-target="#achievements">Achievements</button>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <span class="d-block h6 text-heading mb-0">Status</span>
+                                    <span class="d-block text-sm text-muted" id="message">Press play to guess</span>
+                                </div>
+                                <div>
+                                    <span class="d-block h6 text-heading mb-0">Guessed Numbers</span>
+                                    <span class="d-block text-sm text-muted" id="guessedNumbers">N/A</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-sm btn-neutral w-full mt-3" id="resetGameButton">Reset Game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end w-full" tabindex="-1" id="logs">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Logs</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="log" class="log-area">
+                <div class="card mb-7">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col">Level</th>
+                                    <th scope="col">Range</th>
+                                    <th scope="col">Moves</th>
+                                    <th scope="col">Guesses</th>
+                                    <th scope="col">Correct #</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Hint Used</th>
+                                    <th scope="col">Hint</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end w-full" tabindex="-1" id="achievements">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Achievements</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="row row-cols-2 g-5 mb-3">
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-body pb-5">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-1">
+                                    <span class="d-block font-semibold text-sm text-heading"><span
+                                            id="coins">0</span></span>
+                                    <div class="text-xs text-muted">Coins</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-body pb-5">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-1">
+                                    <span class="d-block font-semibold text-sm text-heading"><span
+                                            id="unlockedAchievements">0/8</span></span>
+                                    <div class="text-xs text-muted">Achievements</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="achievementsContainer"></div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm dashboard-card">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Customization</h4>
+                        <div class="d-flex gap-3 align-items-center">
+                            <div class="input-group input-group-sm input-group-inline">
+                                <span class="input-group-text pe-2"><i class="ph ph-faders"></i></span>
+                                <input type="number" class="form-control" placeholder="Enter number of guesses (min 4)"
+                                    min="4" id="customAttemptsInput">
+                            </div>
+                            <button type="button" class="btn btn-sm px-3 btn-neutral" id="applyCustomizationButton">
+                                Apply
+                            </button>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">If left empty, the default number of guesses is 100.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
